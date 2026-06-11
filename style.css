@@ -1,0 +1,826 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap');
+
+:root {
+	--bg: #f0f2f8;
+	--bg2: #ffffff;
+	--tekst: #1e293b;
+	--tekst2: #64748b;
+	--naglowek: #7c9fd4;
+	--naglowek2: #5a82b8;
+	--karta-bg: #ffffff;
+	--karta-cien: 0 2px 12px rgba(0, 0, 0, 0.06);
+	--karta-cien-hover: 0 8px 28px rgba(0, 0, 0, 0.11);
+	--nav-bg: rgba(255, 255, 255, 0.95);
+	--nav-tekst: #1e293b;
+	--filtr-bg: #eef2f8;
+	--modal-bg: rgba(0, 0, 0, 0.45);
+	--modal-tresc: #ffffff;
+	--input-bg: #eef2f8;
+	--input-border: #d8e2f0;
+	--btn-bg: #7c9fd4;
+	--btn-tekst: #ffffff;
+	--galar-kolor: #a07cd4;
+	--przejscie: 0.2s ease;
+	--blur-amount: blur(12px);
+	--pokeball-color: rgba(124, 159, 212, 0.1);
+}
+
+body.ciemny {
+	--bg: #0f172a;
+	--bg2: #1e293b;
+	--tekst: #e2e8f0;
+	--tekst2: #94a3b8;
+	--karta-bg: #1e293b;
+	--karta-cien: 0 2px 12px rgba(0, 0, 0, 0.25);
+	--karta-cien-hover: 0 8px 28px rgba(0, 0, 0, 0.4);
+	--nav-bg: rgba(15, 23, 42, 0.95);
+	--filtr-bg: #263148;
+	--modal-tresc: #1e293b;
+	--input-bg: #263148;
+	--input-border: #334155;
+	--pokeball-color: rgba(239, 68, 68, 0.12);
+}
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: 'Nunito', 'Segoe UI', sans-serif;
+	background-color: var(--bg);
+	color: var(--tekst);
+	transition:
+		background-color var(--przejscie),
+		color var(--przejscie);
+	line-height: 1.5;
+}
+
+body.zablokowany {
+	overflow: hidden;
+}
+
+header {
+	background: var(--nav-bg);
+	backdrop-filter: var(--blur-amount);
+	border-bottom: 2px solid rgba(239, 68, 68, 0.15);
+	padding: 16px 30px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 16px;
+	flex-wrap: wrap;
+	position: sticky;
+	top: 0;
+	z-index: 10;
+}
+
+header h1 {
+	display: flex;
+	align-items: flex-end;
+	gap: 0px;
+	line-height: 1;
+}
+
+.logoPokemon {
+	height: 44px;
+	width: auto;
+	display: block;
+	filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
+}
+
+body.ciemny .logoPokemon {
+	filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4)) brightness(1.15);
+}
+
+.logoPokedex {
+	color: var(--typ-kolor, var(--naglowek));
+	font-size: 1.85rem;
+	font-weight: 900;
+	letter-spacing: -1px;
+	line-height: 1;
+	padding-bottom: 3px;
+}
+
+.headerPrawa {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	flex-wrap: wrap;
+}
+
+.btnTryb,
+.btnUlubione {
+	background: var(--filtr-bg);
+	border: none;
+	color: var(--tekst);
+	padding: 8px 18px;
+	border-radius: 8px;
+	cursor: pointer;
+	font-size: 0.85rem;
+	font-family: inherit;
+	font-weight: 700;
+	transition: all var(--przejscie);
+	letter-spacing: 0.3px;
+}
+
+.btnTryb:hover,
+.btnUlubione:hover {
+	background: var(--naglowek);
+	color: #fff;
+	transform: translateY(-1px);
+}
+
+.btnUlubione.aktywny {
+	background: var(--naglowek);
+	color: #fff;
+}
+
+.ulubioneWrap {
+	position: relative;
+}
+
+.licznikUlubione {
+	position: absolute;
+	top: -6px;
+	right: -6px;
+	background: var(--naglowek);
+	color: #fff;
+	border-radius: 50%;
+	width: 18px;
+	height: 18px;
+	font-size: 0.68rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: 900;
+}
+
+nav {
+	background-color: var(--bg2);
+	padding: 14px 30px;
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	border-bottom: 1px solid var(--input-border);
+}
+
+.szukajWrap {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+#inputSzukaj {
+	flex: 1;
+	max-width: 400px;
+	padding: 10px 18px;
+	border-radius: 8px;
+	border: 2px solid var(--input-border);
+	background: var(--input-bg);
+	color: var(--tekst);
+	font-size: 0.95rem;
+	font-family: inherit;
+	font-weight: 600;
+	transition: all var(--przejscie);
+	outline: none;
+}
+
+#inputSzukaj:focus {
+	border-color: var(--naglowek);
+	background: var(--bg2);
+	box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+}
+
+#filtrTypow {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+	align-items: center;
+}
+
+.filtrLabel {
+	font-size: 0.8rem;
+	color: var(--tekst2);
+	margin-right: 4px;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+}
+
+.btnTyp {
+	padding: 7px 18px;
+	border-radius: 10px;
+	border: none;
+	background: var(--typ-pastel, #e2e8f0);
+	color: var(--typ-kolor, #475569);
+	font-size: 0.72rem;
+	font-family: inherit;
+	cursor: pointer;
+	font-weight: 800;
+	transition: all var(--przejscie);
+	text-transform: uppercase;
+	letter-spacing: 0.6px;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.btnTyp.aktywny {
+	background: var(--typ-kolor, #475569);
+	color: #fff;
+	box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+	transform: translateY(-1px);
+}
+
+.btnTyp:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.typ-grass {
+	--typ-kolor: #5aab6a;
+	--typ-pastel: #d4f0da;
+}
+.typ-fire {
+	--typ-kolor: #e8813a;
+	--typ-pastel: #fde4cd;
+}
+.typ-water {
+	--typ-kolor: #5b9de8;
+	--typ-pastel: #cde4fa;
+}
+.typ-electric {
+	--typ-kolor: #d4b53a;
+	--typ-pastel: #faf3c0;
+}
+.typ-psychic {
+	--typ-kolor: #e0587a;
+	--typ-pastel: #fad4de;
+}
+.typ-ghost {
+	--typ-kolor: #7a6aaa;
+	--typ-pastel: #ddd8f0;
+}
+.typ-dragon {
+	--typ-kolor: #7048e8;
+	--typ-pastel: #ddd6fa;
+}
+.typ-dark {
+	--typ-kolor: #5a4848;
+	--typ-pastel: #d8d4d4;
+}
+.typ-rock {
+	--typ-kolor: #a09038;
+	--typ-pastel: #eae4c0;
+}
+.typ-ground {
+	--typ-kolor: #c8a050;
+	--typ-pastel: #f5e8cc;
+}
+.typ-fighting {
+	--typ-kolor: #c03838;
+	--typ-pastel: #f5cccc;
+}
+.typ-ice {
+	--typ-kolor: #70c0c0;
+	--typ-pastel: #d0f0f0;
+}
+.typ-bug {
+	--typ-kolor: #90a030;
+	--typ-pastel: #e4ecc0;
+}
+.typ-flying {
+	--typ-kolor: #8898d8;
+	--typ-pastel: #dde2f5;
+}
+.typ-steel {
+	--typ-kolor: #9898b8;
+	--typ-pastel: #deded0;
+}
+.typ-normal {
+	--typ-kolor: #8888a0;
+	--typ-pastel: #dcdce8;
+}
+.typ-fairy {
+	--typ-kolor: #d870a0;
+	--typ-pastel: #f5d0e8;
+}
+.typ-poison {
+	--typ-kolor: #9040a0;
+	--typ-pastel: #e8ccf0;
+}
+
+main {
+	padding: 30px;
+	min-height: 70vh;
+}
+
+#siatka {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+	gap: 20px;
+}
+
+.karta {
+	background: var(--karta-bg);
+	border-radius: 16px;
+	box-shadow: var(--karta-cien);
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	transition: all var(--przejscie);
+	cursor: default;
+	border: 2px solid transparent;
+}
+
+.karta:hover {
+	transform: translateY(-6px);
+	box-shadow: var(--karta-cien-hover);
+	border-color: rgba(124, 159, 212, 0.35);
+}
+
+.kartaGora {
+	position: relative;
+	padding: 28px 16px 20px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background: var(--karta-typ-pastel, #eef2f8);
+	overflow: hidden;
+	transition: background var(--przejscie);
+}
+
+.kartaGora::before {
+	content: '';
+	position: absolute;
+	right: -18px;
+	top: -18px;
+	width: 110px;
+	height: 110px;
+	background-image: url('pokeball.png');
+	background-size: contain;
+	background-repeat: no-repeat;
+	opacity: 0.18;
+	pointer-events: none;
+}
+
+.numer {
+	position: absolute;
+	top: 10px;
+	left: 12px;
+	font-size: 0.7rem;
+	color: var(--tekst2);
+	font-weight: 800;
+	letter-spacing: 0.3px;
+}
+
+.galarTag {
+	position: absolute;
+	top: 10px;
+	right: 12px;
+	background: var(--galar-kolor);
+	color: #fff;
+	font-size: 0.62rem;
+	padding: 2px 10px;
+	border-radius: 6px;
+	font-weight: 800;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+}
+
+.kartaFigure {
+	width: 120px;
+	height: 120px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	z-index: 1;
+}
+
+.kartaFigure img {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+	filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.15));
+	transition: transform 0.25s ease;
+}
+
+.karta:hover .kartaFigure img {
+	transform: scale(1.08) translateY(-4px);
+}
+
+.kartaDol {
+	padding: 14px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	flex: 1;
+	border-top: 2px solid var(--filtr-bg);
+}
+
+.kartaDol h2 {
+	font-size: 1.05rem;
+	color: var(--tekst);
+	font-weight: 900;
+	letter-spacing: -0.3px;
+	text-align: center;
+}
+
+.typy {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 5px;
+	justify-content: center;
+}
+
+.typBadge {
+	font-size: 0.62rem;
+	padding: 3px 12px;
+	border-radius: 8px;
+	text-transform: uppercase;
+	font-weight: 800;
+	letter-spacing: 0.6px;
+	background: #e2e8f0;
+	color: #475569;
+}
+.typBadge.typ-grass {
+	background: #d4f0da;
+	color: #5aab6a;
+}
+.typBadge.typ-fire {
+	background: #fde4cd;
+	color: #e8813a;
+}
+.typBadge.typ-water {
+	background: #cde4fa;
+	color: #5b9de8;
+}
+.typBadge.typ-electric {
+	background: #faf3c0;
+	color: #d4b53a;
+}
+.typBadge.typ-psychic {
+	background: #fad4de;
+	color: #e0587a;
+}
+.typBadge.typ-ghost {
+	background: #ddd8f0;
+	color: #7a6aaa;
+}
+.typBadge.typ-dragon {
+	background: #ddd6fa;
+	color: #7048e8;
+}
+.typBadge.typ-dark {
+	background: #d8d4d4;
+	color: #5a4848;
+}
+.typBadge.typ-rock {
+	background: #eae4c0;
+	color: #a09038;
+}
+.typBadge.typ-ground {
+	background: #f5e8cc;
+	color: #c8a050;
+}
+.typBadge.typ-fighting {
+	background: #f5cccc;
+	color: #c03838;
+}
+.typBadge.typ-ice {
+	background: #d0f0f0;
+	color: #70c0c0;
+}
+.typBadge.typ-bug {
+	background: #e4ecc0;
+	color: #90a030;
+}
+.typBadge.typ-flying {
+	background: #dde2f5;
+	color: #8898d8;
+}
+.typBadge.typ-steel {
+	background: #deded0;
+	color: #9898b8;
+}
+.typBadge.typ-normal {
+	background: #dcdce8;
+	color: #8888a0;
+}
+.typBadge.typ-fairy {
+	background: #f5d0e8;
+	color: #d870a0;
+}
+.typBadge.typ-poison {
+	background: #e8ccf0;
+	color: #9040a0;
+}
+
+.krotkaDesc {
+	font-size: 0.73rem;
+	color: var(--tekst2);
+	line-height: 1.5;
+	flex: 1;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	text-align: center;
+}
+
+.kartaAkcje {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 4px;
+	gap: 8px;
+}
+
+.btnSzczegoly {
+	background: var(--typ-kolor, var(--btn-bg));
+	color: #fff;
+	border: none;
+	padding: 8px 14px;
+	border-radius: 8px;
+	cursor: pointer;
+	font-size: 0.78rem;
+	font-family: inherit;
+	font-weight: 800;
+	transition: all var(--przejscie);
+	flex: 1;
+	text-align: center;
+	letter-spacing: 0.3px;
+	text-transform: uppercase;
+	opacity: 0.9;
+}
+
+.btnSzczegoly:hover {
+	opacity: 1;
+	transform: scale(0.97);
+}
+
+.btnUlubionyKarta {
+	background: var(--filtr-bg);
+	border: none;
+	color: var(--naglowek);
+	width: 36px;
+	height: 36px;
+	border-radius: 8px;
+	font-size: 1.1rem;
+	cursor: pointer;
+	transition: all var(--przejscie);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.btnUlubionyKarta.aktywny {
+	background: var(--naglowek);
+	color: #fff;
+}
+
+.btnUlubionyKarta:hover {
+	background: var(--naglowek);
+	color: #fff;
+}
+
+.brakWynikow {
+	grid-column: 1 / -1;
+	text-align: center;
+	color: var(--tekst2);
+	font-size: 1.1rem;
+	font-weight: 700;
+	padding: 60px 20px;
+	background: var(--karta-bg);
+	border-radius: 16px;
+}
+
+.modal {
+	display: none;
+	position: fixed;
+	inset: 0;
+	background: var(--modal-bg);
+	backdrop-filter: blur(8px);
+	z-index: 100;
+	align-items: center;
+	justify-content: center;
+	padding: 20px;
+}
+
+.modal.widoczny {
+	display: flex;
+}
+
+.modalWnetrze {
+	background: var(--modal-tresc);
+	border-radius: 20px;
+	max-width: 680px;
+	width: 100%;
+	max-height: 90vh;
+	overflow-y: auto;
+	padding: 32px;
+	position: relative;
+	border: 2px solid rgba(239, 68, 68, 0.15);
+	box-shadow: 0 24px 48px rgba(0, 0, 0, 0.2);
+}
+
+.modalGlowka {
+	margin-bottom: 24px;
+}
+
+.modalGlowka .numer {
+	position: static;
+	display: inline-block;
+	font-size: 0.78rem;
+	color: var(--tekst2);
+	margin-bottom: 4px;
+	background: var(--filtr-bg);
+	padding: 3px 12px;
+	border-radius: 6px;
+	font-weight: 800;
+	letter-spacing: 0.4px;
+}
+
+.modalGlowka h2 {
+	font-size: 2rem;
+	margin: 8px 0 12px;
+	font-weight: 900;
+	letter-spacing: -0.8px;
+}
+
+.modalSrodek {
+	display: grid;
+	grid-template-columns: 200px 1fr;
+	gap: 28px;
+	align-items: start;
+}
+
+.modalFigure {
+	background: var(--filtr-bg);
+	border-radius: 16px;
+	padding: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	overflow: hidden;
+}
+
+.modalFigure::before {
+	content: '';
+	position: absolute;
+	right: -10px;
+	top: -10px;
+	width: 100px;
+	height: 100px;
+	background-image: url('pokeball.png');
+	background-size: contain;
+	background-repeat: no-repeat;
+	opacity: 0.15;
+	pointer-events: none;
+}
+
+.modalFigure img {
+	width: 160px;
+	height: 160px;
+	object-fit: contain;
+	position: relative;
+	z-index: 1;
+}
+
+.modalInfo {
+	display: flex;
+	flex-direction: column;
+	gap: 14px;
+}
+
+.modalOpis {
+	font-size: 0.88rem;
+	color: var(--tekst2);
+	line-height: 1.65;
+	font-weight: 500;
+}
+
+.modalStat {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 10px;
+	background: var(--filtr-bg);
+	padding: 14px;
+	border-radius: 12px;
+	font-size: 0.83rem;
+}
+
+.modalStat span {
+	color: var(--tekst2);
+	font-weight: 600;
+	text-transform: uppercase;
+	font-size: 0.72rem;
+	letter-spacing: 0.5px;
+}
+
+.modalStat strong {
+	color: var(--tekst);
+	font-weight: 800;
+}
+
+.modalInfo p {
+	font-size: 0.83rem;
+	color: var(--tekst2);
+	line-height: 1.6;
+	font-weight: 500;
+}
+
+.modalInfo p strong {
+	color: var(--tekst);
+	font-weight: 800;
+}
+
+.btnZamknij {
+	position: absolute;
+	top: 18px;
+	right: 18px;
+	background: var(--filtr-bg);
+	border: none;
+	width: 32px;
+	height: 32px;
+	border-radius: 8px;
+	font-size: 1.1rem;
+	cursor: pointer;
+	color: var(--tekst2);
+	font-family: inherit;
+	transition: all var(--przejscie);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.btnZamknij:hover {
+	background: var(--naglowek);
+	color: #fff;
+}
+
+footer {
+	text-align: center;
+	padding: 24px;
+	font-size: 0.78rem;
+	font-weight: 600;
+	color: var(--tekst2);
+	border-top: 1px solid var(--input-border);
+	margin-top: 40px;
+	letter-spacing: 0.3px;
+}
+
+@media (max-width: 700px) {
+	header {
+		flex-direction: column;
+		align-items: flex-start;
+		padding: 14px 16px;
+	}
+
+	header h1 {
+		font-size: 1.4rem;
+	}
+
+	nav {
+		padding: 12px 16px;
+	}
+
+	#inputSzukaj {
+		max-width: 100%;
+	}
+
+	main {
+		padding: 16px;
+	}
+
+	#siatka {
+		grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+		gap: 14px;
+	}
+
+	.kartaFigure {
+		width: 95px;
+		height: 95px;
+	}
+
+	.modalWnetrze {
+		padding: 22px;
+	}
+
+	.modalSrodek {
+		grid-template-columns: 1fr;
+	}
+
+	.modalFigure img {
+		width: 120px;
+		height: 120px;
+	}
+}
+
+@media (max-width: 450px) {
+	#siatka {
+		grid-template-columns: 1fr 1fr;
+	}
+}

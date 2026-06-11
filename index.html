@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokédex</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="shortcut icon" href="Gengar-Gigantamax.png" type="image/x-icon">
+</head>
+
+<body>
+    <header>
+        <h1>
+            <img src="International_Pokémon_logo.svg" alt="Pokémon" class="logoPokemon">
+        </h1>
+        <div class="headerPrawa">
+            <div class="ulubioneWrap">
+                <button class="btnUlubione" id="btnUlubione">♥ Ulubione</button>
+                <span class="licznikUlubione" id="licznikUlubione">0</span>
+            </div>
+            <button class="btnTryb" id="btnTryb">☾ Ciemny tryb</button>
+        </div>
+    </header>
+
+    <nav>
+        <div class="szukajWrap">
+            <input type="text" id="inputSzukaj" placeholder="Szukaj po nazwie, typie lub numerze...">
+        </div>
+        <div id="filtrTypow">
+            <span class="filtrLabel">Filtruj po typie:</span>
+        </div>
+    </nav>
+
+    <main>
+        <div id="siatka"></div>
+    </main>
+
+    <div class="modal" id="modal">
+        <div class="modalWnetrze">
+            <button class="btnZamknij" id="btnZamknijModal">✕</button>
+            <div id="modalTresc"></div>
+        </div>
+    </div>
+    <script src="dane.js">
+    </script>
+    <script src="script.js"></script>
+</body>
+
+</html>
